@@ -459,7 +459,46 @@ Crafty.scene('Loading', function(){
 
             }
             var curDict = CardsPlants;
-            for (var key in CardsPlants){
+            for (var key in curDict){
+                toLoadArr[i]='assets/'+curDict[key]['pict'];                
+                
+                ++i;
+                
+                for(var j=0;j<curDict[key]['audio'].length;++j){
+                	toLoadArr[i]='assets/'+curDict[key]['audio'][j];
+                	++i;
+                }
+
+            }
+            
+            var curDict = CardsFood;
+            for (var key in curDict){
+                toLoadArr[i]='assets/'+curDict[key]['pict'];                
+                
+                ++i;
+                
+                for(var j=0;j<curDict[key]['audio'].length;++j){
+                	toLoadArr[i]='assets/'+curDict[key]['audio'][j];
+                	++i;
+                }
+
+            }
+            
+            var curDict = CardsMaterialCulture;
+            for (var key in curDict){
+                toLoadArr[i]='assets/'+curDict[key]['pict'];                
+                
+                ++i;
+                
+                for(var j=0;j<curDict[key]['audio'].length;++j){
+                	toLoadArr[i]='assets/'+curDict[key]['audio'][j];
+                	++i;
+                }
+
+            }
+            
+            var curDict = CardsFamily1;
+            for (var key in curDict){
                 toLoadArr[i]='assets/'+curDict[key]['pict'];                
                 
                 ++i;

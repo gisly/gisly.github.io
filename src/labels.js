@@ -117,7 +117,7 @@ CardsMaterialCulture={
     }
 };
 
-CardsFamily={
+CardsFamily1={
 	spr_card1:{
         label:'омолги',
         pict:'son_thumb.jpg',
