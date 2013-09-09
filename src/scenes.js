@@ -215,7 +215,7 @@ Crafty.scene('ShowCardsDescription', function() {
 	displayBackToMenuButton(cardFieldHeight);
 	displayCustomText('Нажмите на изображение, чтобы услышать, как оно произносится', 
 						Game.width()/2, PADDING);
-	displayStartGameButton('ShowCards',cardFieldHeight);
+	displayStartGameButton('ShowCards', 2*PADDING);
 });
 
 
