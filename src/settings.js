@@ -16,6 +16,6 @@ var TIMEOUT_LAPSE = 2000;
 var LABEL_WIDTH = 210;
 var LABEL_HEIGHT = 60;
 
-var OFFSET = 20;
+var OFFSET = 5;
 
 

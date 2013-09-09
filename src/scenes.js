@@ -33,11 +33,9 @@ function displayCardsRandomly(cardClass){
         curCard.addComponent(cardClass); 
         if(cardClass=='CardAudio'){
         	attachLabelToCard(curCard,
-        		Game.width() - (LABEL_WIDTH+PADDING_H), 
+        		Game.width() - LABEL_WIDTH, 
         		curCardNum*(PADDING_H+LABEL_HEIGHT));
-        		
-        		
-            
+ 
         }
    }
 }
