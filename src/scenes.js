@@ -2,7 +2,7 @@
 
 var cardNum = 0;
 
-var numOfCols = Math.floor((Game.width() - (LABEL_WIDTH+PADDING))/(CARD_WIDTH+PADDING));
+var numOfCols = Math.floor((Game.width() - (LABEL_WIDTH+PADDING_H))/(CARD_WIDTH+PADDING_H));
 var numOfRows = 0;
 
 var cardFieldHeight = 0;
@@ -33,8 +33,8 @@ function displayCardsRandomly(cardClass){
         curCard.addComponent(cardClass); 
         if(cardClass=='CardAudio'){
         	attachLabelToCard(curCard,
-        		Game.width() - (LABEL_WIDTH+PADDING), 
-        		curCardNum*(PADDING+LABEL_HEIGHT));
+        		Game.width() - (LABEL_WIDTH+PADDING_H), 
+        		curCardNum*(PADDING_H+LABEL_HEIGHT));
         		
         		
             
@@ -65,30 +65,30 @@ function displayMemoryCardsRandomly(){
 }
 
 function displayBackToMainMenuButton(buttonY){
-	displayButton('К выбору темы', 'MainMenu', BUTTON_WIDTH+PADDING, buttonY);  
+	displayButton('К выбору темы', 'MainMenu', BUTTON_PADDING_H, buttonY);  
 }
 
 function displayBackToMenuButton(buttonY){
-	displayButton('В меню', 'Menu', 2*(BUTTON_WIDTH+PADDING), buttonY);  
+	displayButton('В меню', 'Menu', BUTTON_WIDTH+BUTTON_PADDING_H, buttonY);  
 }
 
 function displayBackwardButton(sceneTitle, buttonY){ 
-	displayButton('<<Назад', sceneTitle, 3*(BUTTON_WIDTH+PADDING), buttonY); 
+	displayButton('<<Назад', sceneTitle, 2*(BUTTON_WIDTH+BUTTON_PADDING_H), buttonY); 
 }
 
 function displayForwardButton(sceneTitle, buttonY){
-	displayButton('Вперед>>', sceneTitle, 4*(BUTTON_WIDTH+PADDING), buttonY);  
+	displayButton('Вперед>>', sceneTitle, 3*(BUTTON_WIDTH+BUTTON_PADDING_H), buttonY);  
 }
 
 function displayStartGameButton(sceneTitle, buttonY){
-	displayButton('Начать', sceneTitle, 4*(BUTTON_WIDTH+PADDING), buttonY);  
+	displayButton('Начать', sceneTitle, 0.5*(Game.width()-BUTTON_WIDTH), buttonY);  
 }
 
 
 function displayButtonArray(titleArray){
 	for(var i=0;i<titleArray.length;++i){
 		displayButton(titleArray[i]['title'], titleArray[i]['scene'], 
-									BUTTON_WIDTH+PADDING, BUTTON_PADDING + (BUTTON_HEIGHT+BUTTON_PADDING)*i); 
+									PADDING_H, BUTTON_PADDING+ (BUTTON_HEIGHT+BUTTON_PADDING)*i); 
 	}
 }
 
@@ -106,7 +106,7 @@ function displayGameTypeButton(buttonLabel, cardsType, buttonX, buttonY){
 							        	++cardNum;
 							        }
 							        numOfRows = Math.ceil(cardNum/numOfCols);
-							        cardFieldHeight = numOfRows*(CARD_HEIGHT+PADDING +LABEL_HEIGHT);
+							        cardFieldHeight = numOfRows*(CARD_HEIGHT+PADDING_V+LABEL_HEIGHT);
 									Crafty.scene('ShowAssets');
 								}).setText(buttonLabel);
 }
@@ -149,8 +149,8 @@ function createMemoryArray(){
 function createCardByIndex(curCardName, colIndex, rowIndex){
 	return Crafty.e(curCardName+', 2D, DOM, Mouse')
                 .setName(curCardName)
-                .attr({x: colIndex*(CARD_WIDTH + PADDING) + OFFSET, 
-                	y: rowIndex*(CARD_HEIGHT + PADDING)
+                .attr({x: colIndex*(CARD_WIDTH + PADDING_H) + OFFSET, 
+                	y: rowIndex*(CARD_HEIGHT + PADDING_V)
                 	, w:CARD_WIDTH, h: CARD_HEIGHT});
 }
 
@@ -175,11 +175,11 @@ function initScene(){
 
 Crafty.scene('MainMenu', function() {
 	Crafty.audio.stop();
-    displayGameTypeButton('Животные и птицы',CardsAnimals,PADDING, PADDING);
-    displayGameTypeButton('Грибы и ягоды',CardsPlants,PADDING, 2*PADDING+BUTTON_HEIGHT);
-    displayGameTypeButton('Еда',CardsFood,PADDING, 3*PADDING+2*BUTTON_HEIGHT);
-    displayGameTypeButton('Материальная культура',CardsMaterialCulture,PADDING, 4*PADDING+3*BUTTON_HEIGHT);
-    displayGameTypeButton('Семья-1',CardsFamily1,PADDING, 5*PADDING+4*BUTTON_HEIGHT);
+    displayGameTypeButton('Животные и птицы',CardsAnimals,PADDING_H, PADDING_V);
+    displayGameTypeButton('Грибы и ягоды',CardsPlants,PADDING_H, 2*PADDING_V+BUTTON_HEIGHT);
+    displayGameTypeButton('Еда',CardsFood,PADDING_H, 3*PADDING_V+2*BUTTON_HEIGHT);
+    displayGameTypeButton('Материальная культура',CardsMaterialCulture,PADDING_H, 4*PADDING_V+3*BUTTON_HEIGHT);
+    displayGameTypeButton('Семья-1',CardsFamily1,PADDING_H, 5*PADDING_V+4*BUTTON_HEIGHT);
 });
 
 
@@ -214,8 +214,8 @@ Crafty.scene('ShowCardsDescription', function() {
 	displayBackToMainMenuButton(cardFieldHeight);
 	displayBackToMenuButton(cardFieldHeight);
 	displayCustomText('Нажмите на изображение, чтобы услышать, как оно произносится', 
-						Game.width()/2, PADDING);
-	displayStartGameButton('ShowCards', 2*PADDING);
+						Game.width()/2, PADDING_V);
+	displayStartGameButton('ShowCards', 2*PADDING_V);
 });
 
 
@@ -246,7 +246,7 @@ Crafty.scene('AddLabelDescription', function() {
 	displayBackToMenuButton(cardFieldHeight);
 	
 	displayCustomText('Поднесите название к картинке', 
-						Game.width()/2, PADDING);
+						Game.width()/2, PADDING_V);
 	displayStartGameButton('AddLabel',cardFieldHeight);
 });
 
@@ -288,7 +288,7 @@ Crafty.scene('ClickCardDescription', function() {
 	displayBackToMenuButton(cardFieldHeight);
 	
 	displayCustomText('Нажмите на картинку, название которой произносят', 
-						Game.width()/2, PADDING);
+						Game.width()/2, PADDING_V);
 	displayStartGameButton('ClickCard',cardFieldHeight);
 });
 
@@ -347,7 +347,7 @@ Crafty.scene('MemoryDescription', function() {
 	
 	
 	displayCustomText('Memory', 
-						Game.width()/2, PADDING);
+						Game.width()/2, PADDING_V);
 	displayStartGameButton('Memory',cardFieldHeight);
 });
 
