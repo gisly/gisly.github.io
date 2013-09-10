@@ -1,6 +1,6 @@
 //=============================CONSTANTS
 
-var BUTTON_PADDING = 50;
+var BUTTON_PADDING = 10;
 var BUTTON_PADDING_H = 5;
 
 var PADDING_V = 60;

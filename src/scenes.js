@@ -101,18 +101,20 @@ function displayGameButtonArray(titleArray){
 	
 	for(var i=0;i<titleArray.length;++i){
 		colIndex = Math.floor(i/numOfGameButtonRows);
-   		var divResidue = (i % numOfGameButtonRows);
+   		var divResidue = i % numOfGameButtonRows;
 
    		if(divResidue ==0){
    			var rowIndex = 0;	
    		}
    		else{
-   			var rowIndex = divResidue - 1;	
+   			var rowIndex = divResidue;	
    		}
    		
+
+  		
 		displayGameTypeButton(titleArray[i]['title'], titleArray[i]['cardsType'], 
 									colIndex*(BUTTON_WIDTH+PADDING_H), 
-									BUTTON_PADDING+ (BUTTON_HEIGHT+BUTTON_PADDING)*rowIndex); 
+									rowIndex* (BUTTON_HEIGHT+BUTTON_PADDING)); 
 	}
 }
 
@@ -126,7 +128,7 @@ function displayGameTypeButton(buttonLabel, cardsType, buttonX, buttonY){
 							        	++cardNum;
 							        }
 							        numOfRows = Math.ceil(cardNum/numOfCols);
-							        cardFieldHeight = numOfRows*(CARD_HEIGHT+PADDING_V+LABEL_HEIGHT);
+							        cardFieldHeight = numOfRows*(CARD_HEIGHT+LABEL_HEIGHT)+PADDING_V;
 									Crafty.scene('ShowAssets');
 								}).setText(buttonLabel);
 }
