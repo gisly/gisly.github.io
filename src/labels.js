@@ -1,5 +1,5 @@
 ﻿
-CardsAnimals={
+CardsAnimals1={
 	spr_card1:{
         label:'тураки',
         pict:'crow_thumb.jpg',
@@ -14,23 +14,29 @@ CardsAnimals={
         label:'ӈинакин',
         pict:'dog_thumb.jpg',
         audio:['dog.wav', 'dog.mp3', 'dog.ogg']
-    },
-    spr_card4:{
+    }
+};
+
+
+CardsAnimals2={
+	
+    spr_card1:{
         label:'бэюн',
         pict:'deer_wild_thumb.jpg',
         audio:['deer_wild.wav', 'deer_wild.mp3', 'deer_wild.ogg']
     },
-    spr_card5:{
+    spr_card2:{
         label:'орон',
         pict:'deer_domestic_thumb.jpg',
         audio:['deer_domestic.wav', 'deer_domestic.mp3', 'deer_domestic.ogg']
     },
-    spr_card6:{
+    spr_card3:{
         label:'моты',
         pict:'elk_thumb.jpg',
         audio:['elk.wav', 'elk.mp3', 'elk.ogg']
     }
 };
+
 
 CardsPlants={
 	spr_card1:{
@@ -71,12 +77,12 @@ CardsFood={
         pict:'soup_thumb.jpg',
         audio:['soup.wav', 'soup.mp3', 'soup.ogg']
     },
-    spr_card4:{
+    /*spr_card4:{
         label:'му',
         pict:'water_thumb.jpg',
         audio:['water.wav', 'water.mp3', 'water.ogg']
-    },
-    spr_card5:{
+    },*/
+    spr_card4:{
         label:'турука',
         pict:'salt_thumb.jpg',
         audio:['salt.wav', 'salt.mp3', 'salt.ogg']
@@ -84,7 +90,7 @@ CardsFood={
 };
 
 
-CardsMaterialCulture={
+CardsMaterialCulture1={
 	spr_card1:{
         label:'дюкча',
         pict:'chum_thumb.jpg',
@@ -99,23 +105,29 @@ CardsMaterialCulture={
         label:'гулэ',
         pict:'house_thumb.jpg',
         audio:['house.wav', 'house.mp3', 'house.ogg']
-    },
-    spr_card4:{
+    }
+};
+
+
+CardsMaterialCulture2={
+	
+    spr_card1:{
         label:'эмкэ',
         pict:'cradle_thumb.jpg',
         audio:['cradle.wav', 'cradle.mp3', 'cradle.ogg']
     },
-    spr_card5:{
+    spr_card2:{
         label:'хэлэ',
         pict:'gun_thumb.jpg',
         audio:['gun.wav', 'gun.mp3', 'gun.ogg']
     },
-    spr_card6:{
+    spr_card3:{
         label:'гулувун',
         pict:'fireplace_thumb.jpg',
         audio:['fireplace.wav', 'fireplace.mp3', 'fireplace.ogg']
     }
 };
+
 
 CardsFamily1={
 	spr_card1:{
@@ -137,19 +149,23 @@ CardsFamily1={
         label:'аме',
         pict:'father_thumb.jpg',
         audio:['father.wav', 'father.mp3', 'father.ogg']
-    },
-    spr_card5:{
+    }
+};
+
+
+CardsFamily2={
+	
+    spr_card1:{
         label:'амака',
         pict:'grandfather_thumb.jpg',
         audio:['grandfather.wav', 'grandfather.mp3', 'grandfather.ogg']
     },
-    spr_card6:{
+    spr_card2:{
         label:'эбэко',
         pict:'grandmother_thumb.jpg',
         audio:['grandmother.wav', 'grandmother.mp3', 'grandmother.ogg']
     }
 };
-
 
 
 
