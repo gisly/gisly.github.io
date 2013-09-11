@@ -169,7 +169,7 @@ function createMemoryArray(){
 }
 
 function createCardByIndex(curCardName, colIndex, rowIndex){
-	return Crafty.e(curCardName+', 2D, DOM, Mouse')
+	return Crafty.e('2D, DOM, Mouse, '+curCardName)
                 .setName(curCardName)
                 .attr({x: colIndex*(CARD_WIDTH + PADDING_H) + OFFSET, 
                 	y: rowIndex*(CARD_HEIGHT + PADDING_V)
@@ -222,7 +222,8 @@ Crafty.scene('MainMenu', function() {
 	];
 	
 	displayGameButtonArray(titleArray);
-
+
+
 });
 
 
