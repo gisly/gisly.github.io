@@ -476,7 +476,9 @@ Crafty.scene('ShowAssets', function(){
     }
 
     Crafty.audio.add(audioArr);
-    Crafty.scene('Menu');
+    //Crafty.scene('Menu');
+    
+    Crafty.scene('ShowCards');
  }
 );
 
@@ -584,7 +586,15 @@ Crafty.scene('Loading', function(){
             }
             
             Crafty.load(toLoadArr, function(){
-            	Crafty.scene('MainMenu');
+            	//Crafty.scene('MainMenu');
+            	Cards = CardsAnimals1;
+            	cardNum = 0;
+							        for(obj in Cards){
+							        	++cardNum;
+							        }
+							        numOfRows = Math.ceil(cardNum/numOfCols);
+							        cardFieldHeight = numOfRows*(CARD_HEIGHT+LABEL_HEIGHT)+PADDING_V;
+            	Crafty.scene('ShowAssets')
     		}
     )
 }
