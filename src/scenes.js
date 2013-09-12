@@ -92,10 +92,10 @@ function displayButtonArray(titleArray){
 
 function displayButton(buttonLabel, sceneTitle, buttonX, buttonY){
 	Crafty.e('Button').attr({x:buttonX, y:buttonY}).bind('Click', 
-								function(){
-									alert(sceneTitle);
-									alert("clicked");
-									Crafty.scene(sceneTitle)}).setText(buttonLabel);
+								function(e){
+									Crafty.scene(sceneTitle);
+								}
+							).setText(buttonLabel);
 }
 
 function displayGameButtonArray(titleArray){
@@ -124,7 +124,7 @@ function displayGameButtonArray(titleArray){
 
 function displayGameTypeButton(buttonLabel, cardsType, buttonX, buttonY){
 	Crafty.e('Button').attr({x:buttonX, y:buttonY}).bind('Click', 
-								function(){
+								function(e){
 									Cards = cardsType;
 									cardNum = 0;
 							        for(obj in Cards){

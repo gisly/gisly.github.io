@@ -170,7 +170,7 @@ Crafty.c('CardAudio', {
     init: function() {
     	this.requires('Card');
     	this.showLabelBorder();
-        this.bind('Click', function(){
+        this.bind('Click', function(e){
             this.playAudio();
         })
     },
@@ -199,7 +199,7 @@ Crafty.c('CardAudioLabel', {
 	
     init: function() {
     	this.requires('CardAudio');
-        this.bind('Click', function(){
+        this.bind('Click', function(e){
             this.showLabel();
         })
     },
@@ -231,7 +231,7 @@ Crafty.c('CardAudioLabel', {
 Crafty.c('CardClickBySound', {
 	init: function() {
 		this.requires('Card');
-        this.bind('Click', function(){
+        this.bind('Click', function(e){
             //Crafty.trigger('CardClicked', [this._entityName, this]);
             Crafty.trigger('CardClicked', this);
         })
@@ -248,7 +248,7 @@ Crafty.c('CardMemory', {
         this.flippedCardEn = Crafty.e('2D, DOM, FlippedCard')
 			.attr({x: this._x, y: this._y, w: this._w, h: this._h, z: this._z+1})
 		;
-        this.bind('Click', function(){
+        this.bind('Click', function(e){
             Crafty.trigger('CardClicked', this);
         })
     },
@@ -276,7 +276,7 @@ Crafty.c('CardMemory', {
 //===================================CONTROLS
 Crafty.c("Button", {
     init: function(){
-        this.requires('DOM, 2D, Mouse, Hoverable, Text');
+        this.requires('2D, DOM, Mouse, Hoverable, Text');
         this.css({
             "border": "solid thin white",
             "cursor":"pointer",
