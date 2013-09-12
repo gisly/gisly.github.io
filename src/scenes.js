@@ -92,7 +92,10 @@ function displayButtonArray(titleArray){
 
 function displayButton(buttonLabel, sceneTitle, buttonX, buttonY){
 	Crafty.e('Button').attr({x:buttonX, y:buttonY}).bind('Click', 
-								function(){Crafty.scene(sceneTitle)}).setText(buttonLabel);
+								function(){
+									alert(sceneTitle);
+									alert("clicked");
+									Crafty.scene(sceneTitle)}).setText(buttonLabel);
 }
 
 function displayGameButtonArray(titleArray){
