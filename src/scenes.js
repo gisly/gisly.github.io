@@ -257,11 +257,11 @@ Crafty.scene('Menu', function() {
  */
 
 Crafty.scene('ShowCardsDescription', function() {
-	displayBackToMainMenuButton(2*PADDING_V);
-	displayBackToMenuButton(2*PADDING_V);
+	displayBackToMainMenuButton(3*PADDING_V);
+	displayBackToMenuButton(3*PADDING_V);
 	displayCustomText('Нажмите на изображение, чтобы услышать, как оно произносится', 
 						Game.width()/2, PADDING_V);
-	displayStartGameButton('ShowCards', 2*PADDING_V);
+	displayStartGameButton('ShowCards', 3*PADDING_V);
 });
 
 
