@@ -16,7 +16,10 @@ var Cards;
 //======displaying various elements
 
 function displayCardsRandomly(cardClass){
-	shuffledArray = createShuffledCardArray();   
+	shuffledArray = createShuffledCardArray(); 
+	if(cardClass=='CardAudio'){ 
+		shuffledLabelArray = createShuffledCardArray(); 
+	}
     for(var curCardNum=1;curCardNum<=cardNum;++curCardNum){
       	    
    		var rowIndex = Math.ceil(curCardNum/numOfCols)-1;
@@ -31,10 +34,12 @@ function displayCardsRandomly(cardClass){
    		var curCardName = 'spr_card'+(shuffledArray[curCardNum-1]);
    		var curCard = createCardByIndex(curCardName, colIndex, rowIndex);
         curCard.addComponent(cardClass); 
+        /**if the goal is to match the label with the card
+        show the label seaparately and place it randomly*/
         if(cardClass=='CardAudio'){
-        	attachLabelToCard(curCard,
+        	displayLabelCard(curCard,
         		Game.width() - LABEL_WIDTH, 
-        		curCardNum*(PADDING_H+LABEL_HEIGHT));
+        		shuffledLabelArray[curCardNum-1]*(PADDING_H+LABEL_HEIGHT));
  
         }
    }
@@ -59,7 +64,7 @@ function displayMemoryCardsRandomly(){
    		var curCard = createCardByIndex(curCardName, colIndex, rowIndex);
         curCard.addComponent('CardMemory'); 
    }
-   memoryCardFieldHeight = (rowIndex+1)*(CARD_HEIGHT+PADDING);
+   memoryCardFieldHeight = (rowIndex+1)*(CARD_HEIGHT+PADDING_V);
 }
 
 function displayBackToMainMenuButton(buttonY){
@@ -79,7 +84,7 @@ function displayForwardButton(sceneTitle, buttonY){
 }
 
 function displayStartGameButton(sceneTitle, buttonY){
-	displayButton('Начать', sceneTitle, 0.5*(Game.width()-BUTTON_WIDTH), buttonY);  
+	displayButton('Начать', sceneTitle, 3*(BUTTON_WIDTH+BUTTON_PADDING_H), buttonY);  
 }
 
 
@@ -137,10 +142,10 @@ function displayGameTypeButton(buttonLabel, cardsType, buttonX, buttonY){
 }
 
 function displayCustomText(text, textX, textY){
-	Crafty.e('2D, DOM, Text')
+	textObj = Crafty.e('Description')
         .text(text)
         .attr({ x: textX, y: textY, w:500})
-        .textFont({family:'Cambria', size: '20px'});
+        .textFont(TEXT_FONT);
 }
 
 //utils
@@ -155,6 +160,7 @@ function createShuffledCardArray(){
 		});
 	return shuffledArray;	
 }
+
 
 function createMemoryArray(){
 	var shuffledArray = Array();
@@ -179,7 +185,7 @@ function createCardByIndex(curCardName, colIndex, rowIndex){
                 	, w:CARD_WIDTH, h: CARD_HEIGHT});
 }
 
-function attachLabelToCard(curCard, labelX, labelY){
+function displayLabelCard(curCard, labelX, labelY){
 	var curLabel = Cards[curCard.getName()]['label'];
         Crafty.e('DraggableCardLabel')
                 .CardLabel(curCard.x, curCard.y, curLabel, CARD_WIDTH, CARD_HEIGHT,
@@ -202,24 +208,22 @@ Crafty.scene('MainMenu', function() {
 	Crafty.audio.stop();
 	
 	
-	var titleArray = [{'title': 'Животные-1', 
+	var titleArray = [{'title': 'Животные (часть 1)', 
 					    'cardsType': CardsAnimals1},
-					  {'title': 'Животные-2', 
+					  {'title': 'Животные (часть 1)', 
 					    'cardsType': CardsAnimals2},
 					   {'title': 'Грибы и ягоды', 
 					    'cardsType': CardsPlants},
 					   {'title': 'Еда', 
 					    'cardsType': CardsFood},
-					   {'title': 'Материальная культура-1', 
+					   {'title': 'Материальная культура (часть 1)', 
 					    'cardsType': CardsMaterialCulture1},
-					   {'title': 'Материальная культура-2', 
+					   {'title': 'Материальная культура (часть 2)', 
 					    'cardsType': CardsMaterialCulture2},
-					   {'title': 'Семья-1', 
+					   {'title': 'Семья (часть 1)', 
 					    'cardsType': CardsFamily1},
-					   {'title': 'Семья-2', 
-					    'cardsType': CardsFamily2},
-					    /*{'title': 'Семья-2', 
-					    'cardsType': CardsFamily2}      */
+					   {'title': 'Семья (часть 2)', 
+					    'cardsType': CardsFamily2}
 	
 	
 	];
@@ -257,11 +261,17 @@ Crafty.scene('Menu', function() {
  */
 
 Crafty.scene('ShowCardsDescription', function() {
+
+	
 	displayBackToMainMenuButton(3*PADDING_V);
 	displayBackToMenuButton(3*PADDING_V);
 	displayCustomText('Нажмите на изображение, чтобы услышать, как оно произносится', 
 						Game.width()/2, PADDING_V);
 	displayStartGameButton('ShowCards', 3*PADDING_V);
+	
+	
+	
+	displayForwardButton('AddLabelDescription',cardFieldHeight);
 });
 
 
@@ -294,6 +304,10 @@ Crafty.scene('AddLabelDescription', function() {
 	displayCustomText('Поднесите название к картинке', 
 						Game.width()/2, PADDING_V);
 	displayStartGameButton('AddLabel',2*PADDING_V);
+	
+	//controls
+    displayBackwardButton('ShowCardsDescription',cardFieldHeight);  
+    displayForwardButton('ClickCardDescription', cardFieldHeight); 
 });
 
 
@@ -309,8 +323,8 @@ Crafty.scene('AddLabel', function() {
     
     displayCardsRandomly('CardAudio');
     //controls
-    displayBackwardButton('ShowCards',cardFieldHeight);  
-    displayForwardButton('ClickCard', cardFieldHeight); 
+    displayBackwardButton('ShowCardsDescription',cardFieldHeight);  
+    displayForwardButton('ClickCardDescription', cardFieldHeight); 
     
     displayBackToMainMenuButton(cardFieldHeight);
     displayBackToMenuButton(cardFieldHeight);
@@ -336,6 +350,9 @@ Crafty.scene('ClickCardDescription', function() {
 	displayCustomText('Нажмите на картинку, название которой произносят', 
 						Game.width()/2, PADDING_V);
 	displayStartGameButton('ClickCard',2*PADDING_V);
+	
+	displayBackwardButton('AddLabelDescription',cardFieldHeight);
+    displayForwardButton('MemoryDescription', cardFieldHeight);
 });
 
 
@@ -367,7 +384,7 @@ Crafty.scene('ClickCard', function() {
     this.bind('CardClicked', function(curCard){
     	var cardName = curCard._entityName; 
     	if(cardName==this.curCardName){
-    		attachLabelToCard(curCard, curCard.x+((CARD_WIDTH-LABEL_WIDTH)/2), 
+    		displayLabelCard(curCard, curCard.x+((CARD_WIDTH-LABEL_WIDTH)/2), 
     												curCard.y+CARD_HEIGHT);
     		
     		++i;
@@ -395,6 +412,8 @@ Crafty.scene('MemoryDescription', function() {
 	displayCustomText('Memory', 
 						Game.width()/2, PADDING_V);
 	displayStartGameButton('Memory',2*PADDING_V);
+	
+	displayBackwardButton('ClickCardDescription', cardFieldHeight); 
 });
 
 
@@ -446,7 +465,6 @@ Crafty.scene('Memory', function() {
 		    	this.card1 = null;
 		    	--this.cardsLeft;
 		    	if(this.cardsLeft<=0){
-		    		alert('you win!');
     				this.unbind('CardClicked');
 		    	}
 	    	}
@@ -476,9 +494,8 @@ Crafty.scene('ShowAssets', function(){
     }
 
     Crafty.audio.add(audioArr);
-    //Crafty.scene('Menu');
-    
-    Crafty.scene('ShowCards');
+    Crafty.scene('Menu');
+   
  }
 );
 
@@ -495,97 +512,21 @@ Crafty.scene('Loading', function(){
 
             var toLoadArr=Array();
             var i =0;
-            var curDict = CardsAnimals1;
-            for (var key in curDict){
-                toLoadArr[i]='assets/'+curDict[key]['pict'];                
-                
-                ++i;
-                
-                for(var j=0;j<curDict[key]['audio'].length;++j){
-                	toLoadArr[i]='assets/'+curDict[key]['audio'][j];
-                	++i;
-                }
-
-            }
-            
-            var curDict = CardsAnimals2;
-            for (var key in curDict){
-                toLoadArr[i]='assets/'+curDict[key]['pict'];                
-                
-                ++i;
-                
-                for(var j=0;j<curDict[key]['audio'].length;++j){
-                	toLoadArr[i]='assets/'+curDict[key]['audio'][j];
-                	++i;
-                }
-
-            }
-            
-            var curDict = CardsPlants;
-            for (var key in curDict){
-                toLoadArr[i]='assets/'+curDict[key]['pict'];                
-                
-                ++i;
-                
-                for(var j=0;j<curDict[key]['audio'].length;++j){
-                	toLoadArr[i]='assets/'+curDict[key]['audio'][j];
-                	++i;
-                }
-
-            }
-            
-            var curDict = CardsFood;
-            for (var key in curDict){
-                toLoadArr[i]='assets/'+curDict[key]['pict'];                
-                
-                ++i;
-                
-                for(var j=0;j<curDict[key]['audio'].length;++j){
-                	toLoadArr[i]='assets/'+curDict[key]['audio'][j];
-                	++i;
-                }
-
-            }
-            
-            var curDict = CardsMaterialCulture1;
-            for (var key in curDict){
-                toLoadArr[i]='assets/'+curDict[key]['pict'];                
-                
-                ++i;
-                
-                for(var j=0;j<curDict[key]['audio'].length;++j){
-                	toLoadArr[i]='assets/'+curDict[key]['audio'][j];
-                	++i;
-                }
-
-            }
-            
-            var curDict = CardsMaterialCulture2;
-            for (var key in curDict){
-                toLoadArr[i]='assets/'+curDict[key]['pict'];                
-                
-                ++i;
-                
-                for(var j=0;j<curDict[key]['audio'].length;++j){
-                	toLoadArr[i]='assets/'+curDict[key]['audio'][j];
-                	++i;
-                }
-
-            }
-            
-            var curDict = CardsFamily1;
-            for (var key in curDict){
-                toLoadArr[i]='assets/'+curDict[key]['pict'];                
-                
-                ++i;
-                
-                for(var j=0;j<curDict[key]['audio'].length;++j){
-                	toLoadArr[i]='assets/'+curDict[key]['audio'][j];
-                	++i;
-                }
-
-            }
-            
+            for(var dictCount=0; dictCount<ALL_LABELS.length; ++dictCount){
+	            var curDict = ALL_LABELS[dictCount];
+	            for (var key in curDict){
+	                toLoadArr[i]='assets/'+curDict[key]['pict'];                
+	                
+	                ++i;
+	                
+	                for(var j=0;j<curDict[key]['audio'].length;++j){
+	                	toLoadArr[i]='assets/'+curDict[key]['audio'][j];
+	                	++i;
+	                }
+	
+	            }
+	       }
+           
             Crafty.load(toLoadArr, function(){
             	Crafty.scene('MainMenu');
             	/*Cards = CardsAnimals1;

@@ -167,6 +167,10 @@ CardsFamily2={
     }
 };
 
+ALL_LABELS =[CardsAnimals1,CardsAnimals2,
+			CardsPlants, CardsFood,CardsMaterialCulture1, 
+			CardsFamily1, CardsFamily2]
+
 
 
 

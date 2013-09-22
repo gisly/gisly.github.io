@@ -292,3 +292,12 @@ Crafty.c("Button", {
     	this.text(buttonLabel);
     }
 })
+
+//===================================TEXT ELEMENTS
+Crafty.c("Description", {
+	
+	init: function(){
+		this.requires('2D, DOM, Text');
+	}
+}	
+)
