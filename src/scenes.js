@@ -86,7 +86,7 @@ function displayStartGameButton(sceneTitle, buttonY){
 function displayButtonArray(titleArray){
 	for(var i=0;i<titleArray.length;++i){
 		displayButton(titleArray[i]['title'], titleArray[i]['scene'], 
-									PADDING_H, BUTTON_PADDING+ (BUTTON_HEIGHT+BUTTON_PADDING)*i); 
+									PADDING_H, BUTTON_PADDING_V+ (BUTTON_HEIGHT+BUTTON_PADDING_V)*i); 
 	}
 }
 
@@ -99,7 +99,7 @@ function displayButton(buttonLabel, sceneTitle, buttonX, buttonY){
 }
 
 function displayGameButtonArray(titleArray){
-	var numOfGameButtonRows = Math.floor(Game.height() /(BUTTON_HEIGHT+BUTTON_PADDING));
+	var numOfGameButtonRows = Math.floor(Game.height() /(BUTTON_HEIGHT+BUTTON_PADDING_V));
 	var colIndex = 0;
 	
 	for(var i=0;i<titleArray.length;++i){
@@ -117,7 +117,7 @@ function displayGameButtonArray(titleArray){
   		
 		displayGameTypeButton(titleArray[i]['title'], titleArray[i]['cardsType'], 
 									colIndex*(BUTTON_WIDTH+PADDING_H), 
-									rowIndex* (BUTTON_HEIGHT+BUTTON_PADDING)); 
+									rowIndex* (BUTTON_HEIGHT+BUTTON_PADDING_V)); 
 	}
 }
 
@@ -249,7 +249,7 @@ Crafty.scene('Menu', function() {
 	Crafty.audio.stop();
     displayButtonArray(titleArray);
     
-    displayBackToMainMenuButton(titleArray.length*(BUTTON_HEIGHT+BUTTON_PADDING)+BUTTON_PADDING);
+    displayBackToMainMenuButton(titleArray.length*(BUTTON_HEIGHT+BUTTON_PADDING_V)+BUTTON_PADDING_V);
 });
 
 /**
@@ -488,6 +488,7 @@ Crafty.scene('Loading', function(){
         .text('Loading; please wait...')
         .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
         .css($text_css);
+
         
         //TODO: load evert level type!
 
@@ -586,15 +587,15 @@ Crafty.scene('Loading', function(){
             }
             
             Crafty.load(toLoadArr, function(){
-            	//Crafty.scene('MainMenu');
-            	Cards = CardsAnimals1;
+            	Crafty.scene('MainMenu');
+            	/*Cards = CardsAnimals1;
             	cardNum = 0;
 							        for(obj in Cards){
 							        	++cardNum;
 							        }
 							        numOfRows = Math.ceil(cardNum/numOfCols);
 							        cardFieldHeight = numOfRows*(CARD_HEIGHT+LABEL_HEIGHT)+PADDING_V;
-            	Crafty.scene('ShowAssets')
+            	Crafty.scene('ShowAssets')*/
     		}
     )
 }

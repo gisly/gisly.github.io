@@ -151,6 +151,7 @@ Crafty.c('CardLabelText', {
 
 Crafty.c('Card', {
     init: function() {
+    	this.requires('Mouse');
         this.css({
             "cursor":"pointer"
         });
